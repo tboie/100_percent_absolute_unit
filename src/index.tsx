@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
-import "./NOTHING_STYLE.css";
+import "./NOTHING.css";
 import ABSOLUTE_UNIT from "./ABSOLUTE_UNIT";
 
 ReactDOM.render(
