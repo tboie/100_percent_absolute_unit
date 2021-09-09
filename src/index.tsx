@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
-import App from "./App";
+
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
+import "./NOTHING_STYLE.css";
+import ABSOLUTE_UNIT from "./ABSOLUTE_UNIT";
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ABSOLUTE_UNIT />
   </React.StrictMode>,
   document.getElementById("root")
 );
