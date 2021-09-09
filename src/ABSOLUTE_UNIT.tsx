@@ -6,6 +6,7 @@ export type TYPE_ABSOLUTE_UNIT = {
   y: number;
   w: number;
   h: number;
+  z?: number;
   sW?: number;
   sH?: number;
   c?: string[];
