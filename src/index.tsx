@@ -6,10 +6,11 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./NOTHING.css";
 import ABSOLUTE_UNIT from "./ABSOLUTE_UNIT";
+import MATTER from "./MATTER";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ABSOLUTE_UNIT />
+    <ABSOLUTE_UNIT {...MATTER} />
   </React.StrictMode>,
   document.getElementById("root")
 );
