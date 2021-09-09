@@ -17,12 +17,14 @@ const ABSOLUTE_UNIT = (p: TYPE_ABSOLUTE_UNIT) => {
     <div
       className={STYLE.ABSOLUTE_UNIT}
       style={{
-        transform: `translate(${p.x},${p.y})`,
+        transform: `translate(${p.x * 2}%,${p.y * 2}%)`,
         width: `${p.w}%`,
         height: `${p.h}%`,
       }}
     >
-      Test
+      {p.m?.map((m) => (
+        <ABSOLUTE_UNIT {...m} />
+      ))}
     </div>
   );
 };
