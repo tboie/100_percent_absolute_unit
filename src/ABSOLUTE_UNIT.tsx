@@ -8,7 +8,7 @@ export type TYPE_ABSOLUTE_UNIT = {
   h: number;
   sW?: number;
   sH?: number;
-  e?: string[];
+  c?: string[];
   m?: TYPE_ABSOLUTE_UNIT[];
 };
 
