@@ -18,6 +18,7 @@ export type TYPE_ABSOLUTE_UNIT = {
 const ABSOLUTE_UNIT = (p: TYPE_ABSOLUTE_UNIT) => {
   const [e, sE] = useState(!!p.e);
   const { i, x, y, w, h, z, sW, sH, c, m } = p;
+
   return (
     <div
       className={STYLE.ABSOLUTE_UNIT}
@@ -28,8 +29,8 @@ const ABSOLUTE_UNIT = (p: TYPE_ABSOLUTE_UNIT) => {
         zIndex: z || 0,
       }}
     >
-      {p.m?.map((m, idx) => (
-        <ABSOLUTE_UNIT key={m.i + idx} {...m} />
+      {m?.map((mm, idx) => (
+        <ABSOLUTE_UNIT key={mm.i + idx} {...mm} />
       ))}
     </div>
   );
