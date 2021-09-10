@@ -6,6 +6,7 @@ export default {
   y: 0,
   w: 100,
   h: 100,
+  z: 0,
   m: [
     {
       i: "space",
@@ -13,6 +14,7 @@ export default {
       y: 0,
       w: 50,
       h: 50,
+      z: 1,
       m: [
         {
           i: "space",
@@ -20,6 +22,7 @@ export default {
           y: 0,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -27,6 +30,7 @@ export default {
           y: 0,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -34,6 +38,7 @@ export default {
           y: 50,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -41,6 +46,7 @@ export default {
           y: 50,
           w: 50,
           h: 50,
+          z: 2,
         },
       ],
     },
@@ -50,6 +56,7 @@ export default {
       y: 0,
       w: 50,
       h: 50,
+      z: 1,
       m: [
         {
           i: "space",
@@ -57,6 +64,7 @@ export default {
           y: 0,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -64,6 +72,7 @@ export default {
           y: 0,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -71,6 +80,7 @@ export default {
           y: 50,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -78,6 +88,7 @@ export default {
           y: 50,
           w: 50,
           h: 50,
+          z: 2,
         },
       ],
     },
@@ -87,6 +98,7 @@ export default {
       y: 50,
       w: 50,
       h: 50,
+      z: 1,
       m: [
         {
           i: "space",
@@ -94,6 +106,7 @@ export default {
           y: 0,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -101,6 +114,7 @@ export default {
           y: 0,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -108,6 +122,7 @@ export default {
           y: 50,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -115,6 +130,7 @@ export default {
           y: 50,
           w: 50,
           h: 50,
+          z: 2,
         },
       ],
     },
@@ -124,6 +140,7 @@ export default {
       y: 50,
       w: 50,
       h: 50,
+      z: 1,
       m: [
         {
           i: "space",
@@ -131,6 +148,7 @@ export default {
           y: 0,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -138,6 +156,7 @@ export default {
           y: 0,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -145,6 +164,7 @@ export default {
           y: 50,
           w: 50,
           h: 50,
+          z: 2,
         },
         {
           i: "space",
@@ -152,6 +172,7 @@ export default {
           y: 50,
           w: 50,
           h: 50,
+          z: 2,
         },
       ],
     },

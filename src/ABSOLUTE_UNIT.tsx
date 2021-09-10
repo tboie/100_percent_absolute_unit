@@ -17,13 +17,15 @@ export type TYPE_ABSOLUTE_UNIT = {
 
 const ABSOLUTE_UNIT = (p: TYPE_ABSOLUTE_UNIT) => {
   const [e, sE] = useState(!!p.e);
+  const { i, x, y, w, h, z, sW, sH, c, m } = p;
   return (
     <div
       className={STYLE.ABSOLUTE_UNIT}
       style={{
-        transform: `translate(${p.x * 2}%, ${p.y * 2}%)`,
-        width: `${p.w}%`,
-        height: `${p.h}%`,
+        transform: `translate(${x * 2}%, ${y * 2}%)`,
+        width: `${w}%`,
+        height: `${h}%`,
+        zIndex: z || 0,
       }}
     >
       {p.m?.map((m) => (
