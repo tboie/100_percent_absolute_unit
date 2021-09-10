@@ -28,8 +28,8 @@ const ABSOLUTE_UNIT = (p: TYPE_ABSOLUTE_UNIT) => {
         zIndex: z || 0,
       }}
     >
-      {p.m?.map((m) => (
-        <ABSOLUTE_UNIT {...m} />
+      {p.m?.map((m, idx) => (
+        <ABSOLUTE_UNIT key={m.i + idx} {...m} />
       ))}
     </div>
   );
