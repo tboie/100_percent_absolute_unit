@@ -1,7 +1,7 @@
 import { TYPE_ABSOLUTE_UNIT } from "./ABSOLUTE_UNIT";
 
 export default {
-  i: "space",
+  t: "space",
   x: 0,
   y: 0,
   w: 100,
@@ -9,7 +9,7 @@ export default {
   z: 0,
   m: [
     {
-      i: "space",
+      t: "space",
       x: 0,
       y: 0,
       w: 50,
@@ -17,7 +17,7 @@ export default {
       z: 1,
     },
     {
-      i: "space",
+      t: "space",
       x: 50,
       y: 0,
       w: 50,
@@ -25,7 +25,7 @@ export default {
       z: 1,
     },
     {
-      i: "space",
+      t: "space",
       x: 0,
       y: 50,
       w: 50,
@@ -33,7 +33,7 @@ export default {
       z: 1,
     },
     {
-      i: "space",
+      t: "space",
       x: 50,
       y: 50,
       w: 50,
