@@ -12,7 +12,7 @@ const A = (p: T) => (
     }}
   >
     {p.m?.map((m, i) => (
-      <A key={m.z + i} {...m} />
+      <A key={i} {...m} />
     ))}
   </div>
 );
