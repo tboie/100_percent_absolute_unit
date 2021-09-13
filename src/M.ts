@@ -1,7 +1,15 @@
-import { TYPE_ABSOLUTE_UNIT } from "./ABSOLUTE_UNIT";
+export type T = {
+  t: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  z: number;
+  m?: T[];
+};
 
 export default {
-  t: "space",
+  t: "s",
   x: 0,
   y: 0,
   w: 100,
@@ -9,7 +17,7 @@ export default {
   z: 0,
   m: [
     {
-      t: "space",
+      t: "s",
       x: 0,
       y: 0,
       w: 50,
@@ -17,7 +25,7 @@ export default {
       z: 1,
     },
     {
-      t: "space",
+      t: "s",
       x: 50,
       y: 0,
       w: 50,
@@ -25,7 +33,7 @@ export default {
       z: 1,
     },
     {
-      t: "space",
+      t: "s",
       x: 0,
       y: 50,
       w: 50,
@@ -33,7 +41,7 @@ export default {
       z: 1,
     },
     {
-      t: "space",
+      t: "s",
       x: 50,
       y: 50,
       w: 50,
@@ -41,4 +49,4 @@ export default {
       z: 1,
     },
   ],
-} as TYPE_ABSOLUTE_UNIT;
+} as T;
