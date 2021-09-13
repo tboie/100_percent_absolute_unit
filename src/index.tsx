@@ -10,7 +10,7 @@ import MATTER from "./MATTER";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ABSOLUTE_UNIT {...MATTER} />
+    <ABSOLUTE_UNIT i={0} {...MATTER} />
   </React.StrictMode>,
   document.getElementById("root")
 );
