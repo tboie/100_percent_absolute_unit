@@ -1,4 +1,17 @@
-import { TYPE_ABSOLUTE_UNIT } from "./ABSOLUTE_UNIT";
+export type T = {
+  i: number;
+  t: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  z: number;
+  sW?: number;
+  sH?: number;
+  c?: string[];
+  e?: boolean;
+  m?: T[];
+};
 
 export default {
   t: "space",
@@ -41,4 +54,4 @@ export default {
       z: 1,
     },
   ],
-} as TYPE_ABSOLUTE_UNIT;
+} as T;
