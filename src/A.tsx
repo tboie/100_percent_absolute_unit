@@ -10,11 +10,7 @@ const A = (p: T) => (
       height: `${p.h}%`,
       zIndex: p.z,
     }}
-  >
-    {p.m?.map((m, i) => (
-      <A key={i} {...m} />
-    ))}
-  </div>
+  ></div>
 );
 
 export default A;
