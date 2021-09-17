@@ -10,7 +10,11 @@ import M from "./M";
 
 ReactDOM.render(
   <React.StrictMode>
-    <A {...M} i={0} />
+    <>
+      {M.map((m, i) => (
+        <A key={i} i={i} {...m} />
+      ))}
+    </>
   </React.StrictMode>,
   document.getElementById("root")
 );

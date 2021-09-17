@@ -3,5 +3,11 @@ import A from "./A";
 import M from "./M";
 
 test("renders", () => {
-  render(<A {...M} />);
+  render(
+    <>
+      {M.map((m, i) => (
+        <A key={i} {...m} />
+      ))}
+    </>
+  );
 });
