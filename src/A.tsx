@@ -69,7 +69,7 @@ const A = (p: T) => {
         STOP_PRESS(ev);
         SELECTED = "";
         PREV_POINTER_POS = undefined;
-        ev.currentTarget.style.zIndex = z.toString();
+        ev.currentTarget.style.zIndex = `${z}`;
       }}
       onPointerMove={(ev) => {
         if (SELECTED === ev.currentTarget.id) {
