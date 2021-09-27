@@ -2,10 +2,19 @@ import S from "./A.module.scss";
 import { T } from "./M";
 
 let PREV_POINTER_POS: undefined | { x: number; y: number } = undefined;
+// selected unit
 let SELECTED = "";
+// unit resize/move boundaries
+const BOUND_MIN = 25,
+  BOUND_MAX = 75;
 
 const A = (p: T) => {
   let { i, t, x, y, w, h, z, sW, sH, c } = p;
+  // bottom/right resize anchors & translate vals
+  let aB = 0,
+    aR = 0,
+    tX = 0,
+    tY = 0;
 
   const GET_DISTANCE = (x1: number, y1: number, x2: number, y2: number) => ({
     x: x1 - x2,
@@ -20,7 +29,8 @@ const A = (p: T) => {
     };
   };
 
-  const MOVE = (ev: React.PointerEvent<HTMLDivElement>) => {
+  // center area moves, perimeter area resizes (see boundary values)
+  const MODIFY = (ev: React.PointerEvent<HTMLDivElement>) => {
     const ELE = ev.target as HTMLDivElement;
     const ROOT = document.getElementById("root");
 
@@ -35,8 +45,49 @@ const A = (p: T) => {
           PREV_POINTER_POS.y
         );
 
-        ELE.style.transform = `translate(${(x += DIST.x * 2)}%,${(y +=
-          DIST.y * 2)}%)`;
+        // mouse coords in unit
+        const rX = ((POINTER_POS.x - x) / w) * 100;
+        const rY = ((POINTER_POS.y - y) / h) * 100;
+
+        if (DIST.x !== 0) {
+          // right
+          if (rX >= BOUND_MAX) {
+            w += DIST.x;
+            tX = (x / w) * 100;
+          }
+          // left
+          else if (rX <= BOUND_MIN) {
+            w -= DIST.x;
+            x = aR - w;
+            tX = ((aR - w) / w) * 100;
+          }
+          // move
+          else if (rY > BOUND_MIN && rY < BOUND_MAX) {
+            tX = ((x += DIST.x) * 100) / w;
+          }
+          ELE.style.width = w + "%";
+        }
+
+        if (DIST.y !== 0) {
+          // top
+          if (rY <= BOUND_MIN) {
+            h -= DIST.y;
+            y = aB - h;
+            tY = ((aB - h) / h) * 100;
+          }
+          // bottom
+          else if (rY >= BOUND_MAX) {
+            h += DIST.y;
+            tY = (y / h) * 100;
+          }
+          // move
+          else if (rX > BOUND_MIN && rX < BOUND_MAX) {
+            tY = ((y += DIST.y) * 100) / h;
+          }
+          ELE.style.height = h + "%";
+        }
+
+        ELE.style.transform = `translate(${tX}%,${tY}%)`;
       }
 
       STOP_PRESS(ev);
@@ -54,13 +105,30 @@ const A = (p: T) => {
       id={`${z}${i}`}
       className={S.A}
       style={{
-        transform: `translate(${(x *= 2)}%,${(y *= 2)}%)`,
+        transform: `translate(${(tX = (x * 100) / w)}%,${(tY =
+          (y * 100) / h)}%)`,
         width: `${w}%`,
         height: `${h}%`,
         zIndex: z,
       }}
       onPointerDown={(ev) => {
         STOP_PRESS(ev);
+
+        /* bottom y anchor for resize */
+        const tY = parseFloat(
+          ev.currentTarget.style.transform.split(",")[1].replace("%)", "")
+        );
+        aB = (h * tY) / 100 + h;
+
+        /* right x anchor for resize */
+        const tX = parseFloat(
+          ev.currentTarget.style.transform
+            .split("(")[1]
+            .split(",")[0]
+            .replace("%", "")
+        );
+        aR = (w * tX) / 100 + w;
+
         ev.currentTarget.style.zIndex = "100";
         PREV_POINTER_POS = undefined;
         SELECTED = `${z}${i}`;
@@ -71,11 +139,8 @@ const A = (p: T) => {
         PREV_POINTER_POS = undefined;
         ev.currentTarget.style.zIndex = `${z}`;
       }}
-      onPointerMove={(ev) => {
-        if (SELECTED === ev.currentTarget.id) {
-          MOVE(ev);
-        }
-      }}
+      onPointerLeave={() => SELECTED && (SELECTED = "")}
+      onPointerMove={(ev) => SELECTED === ev.currentTarget.id && MODIFY(ev)}
     />
   );
 };

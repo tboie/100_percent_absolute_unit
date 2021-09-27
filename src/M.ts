@@ -15,12 +15,13 @@ export type T = {
 export default [
   {
     t: "s",
-    x: 0,
-    y: 0,
-    w: 50,
-    h: 50,
+    x: 25,
+    y: 25,
+    w: 25,
+    h: 25,
     z: 0,
   },
+  /*
   {
     t: "s",
     x: 50,
@@ -44,5 +45,5 @@ export default [
     w: 50,
     h: 50,
     z: 0,
-  },
+  },*/
 ] as T[];
