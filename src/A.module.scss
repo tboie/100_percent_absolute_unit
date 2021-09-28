@@ -1,5 +1,19 @@
 .A {
   position: absolute;
-  border: 1px solid #000;
   touch-action: none;
+  display: none;
+}
+
+.sm {
+  @media only screen and (min-width: 460px) and (max-width: 599px) {
+    display: block;
+    background-color: red;
+  }
+}
+
+.lg {
+  @media only screen and (min-width: 600px) and (max-width: 1000px) {
+    display: block;
+    background-color: blue;
+  }
 }

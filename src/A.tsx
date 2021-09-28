@@ -9,7 +9,7 @@ const BOUND_MIN = 25,
   BOUND_MAX = 75;
 
 const A = (p: T) => {
-  let { i, t, x, y, w, h, z, sW, sH, c } = p;
+  let { i, t, x, y, w, h, z, sW, sH, c, bp } = p;
   // bottom/right resize anchors & translate vals
   let aB = 0,
     aR = 0,
@@ -103,7 +103,7 @@ const A = (p: T) => {
   return (
     <div
       id={`${z}${i}`}
-      className={S.A}
+      className={`${S.A} ${bp.map((bp) => S[bp]).join(" ")}`}
       style={{
         transform: `translate(${(tX = (x * 100) / w)}%,${(tY =
           (y * 100) / h)}%)`,
