@@ -116,7 +116,7 @@ const A = (p: T) => {
 
         /* bottom y anchor for resize */
         const tY = parseFloat(
-          ev.currentTarget.style.transform.split(",")[1].replace("%)", "")
+          ev.currentTarget.style.transform.split(",")[1]?.replace("%)", "")
         );
         aB = (h * tY) / 100 + h;
 
