@@ -8,7 +8,7 @@ export type T = {
   z: number;
   sW?: number;
   sH?: number;
-  c?: string[];
+  c?: { t: number[]; r: number[]; b: number[]; l: number[] };
   e?: boolean;
   bp: ("sm" | "lg")[];
 };
@@ -16,7 +16,7 @@ export type T = {
 export default [
   {
     t: "s",
-    x: 0,
+    x: 50,
     y: 0,
     w: 50,
     h: 50,
@@ -26,7 +26,7 @@ export default [
   {
     t: "s",
     x: 50,
-    y: 50,
+    y: 75,
     w: 25,
     h: 25,
     z: 0,

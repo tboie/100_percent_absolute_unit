@@ -1,9 +1,11 @@
 import S from "./A.module.scss";
-import { T } from "./M";
+import M, { T } from "./M";
 
 let PREV_POINTER_POS: undefined | { x: number; y: number } = undefined;
+
 // selected unit
 let SELECTED = "";
+
 // unit resize/move boundaries
 const BOUND_MIN = 25,
   BOUND_MAX = 75;
@@ -22,11 +24,75 @@ const A = (p: T) => {
   });
 
   const GET_POINTER_COORDS = (ev: React.PointerEvent<HTMLDivElement>) => {
-    const RECT = document.getElementById("root")?.getBoundingClientRect();
+    const R = document.getElementById("root")?.getBoundingClientRect();
     return {
-      x: RECT ? ((ev.pageX - RECT.left) / RECT.width) * 100 : 0,
-      y: RECT ? ((ev.pageY - RECT.top) / RECT.height) * 100 : 0,
+      x: R ? ((ev.pageX - R.left) / R.width) * 100 : 0,
+      y: R ? ((ev.pageY - R.top) / R.height) * 100 : 0,
     };
+  };
+
+  const SET_CONNECTIONS = () => {
+    c = { t: [], r: [], b: [], l: [] };
+    M.forEach((u, ii) => {
+      if (
+        c &&
+        typeof i !== "undefined" &&
+        ii !== i &&
+        z === u.z &&
+        // collides?
+        !(y + h < u.y || y > u.y + u.h || x + w < u.x || x > u.x + u.w)
+      ) {
+        y <= u.y + u.h && y > u.y && !c.t.includes(ii) && c.t.push(ii); // t
+        y + h >= u.y && y < u.y && !c.b.includes(ii) && c.b.push(ii); // b
+        x + w >= u.x && x < u.x && !c.r.includes(ii) && c.r.push(ii); // r
+        x <= u.x + u.w && x > u.x && !c.l.includes(ii) && c.l.push(ii); // l
+      }
+    });
+  };
+
+  const SET_UNIT = (
+    dim: "w" | "h",
+    mX: number,
+    mY: number,
+    d: number,
+    s1: "t" | "b" | "r" | "l",
+    s2: "t" | "b" | "r" | "l",
+    a: number,
+    ele: HTMLDivElement
+  ) => {
+    if (c) {
+      // right/bottom
+      if (
+        (dim === "w" ? mX : mY) >= BOUND_MAX &&
+        !c[dim === "w" ? s1 : s2].length
+      ) {
+        dim === "w"
+          ? (w += d) && (tX = (x / w) * 100)
+          : (h += d) && (tY = (y / h) * 100);
+      }
+      // left/top
+      else if (
+        (dim === "w" ? mX : mY) <= BOUND_MIN &&
+        !c[dim === "w" ? s2 : s1].length
+      ) {
+        dim === "w"
+          ? (w -= d) && (x = a - w) && (tX = ((a - w) / w) * 100)
+          : (h -= d) && (y = a - h) && (tY = ((a - h) / h) * 100);
+      }
+      // move
+      else if (
+        (dim === "w"
+          ? mY > BOUND_MIN && mY < BOUND_MAX
+          : mX > BOUND_MIN && mX < BOUND_MAX) &&
+        ((d > 0 && !c[dim === "w" ? s1 : s2].length) ||
+          (d < 0 && !c[dim === "w" ? s2 : s1].length))
+      ) {
+        dim === "w" ? (tX = ((x += d) * 100) / w) : (tY = ((y += d) * 100) / h);
+      }
+
+      dim === "w" ? (ele.style.width = w + "%") : (ele.style.height = h + "%");
+      ele.style.transform = `translate(${tX}%,${tY}%)`;
+    }
   };
 
   // center area moves, perimeter area resizes (see boundary values)
@@ -38,6 +104,8 @@ const A = (p: T) => {
       const POINTER_POS = GET_POINTER_COORDS(ev);
 
       if (POINTER_POS && PREV_POINTER_POS) {
+        SET_CONNECTIONS();
+
         const DIST = GET_DISTANCE(
           POINTER_POS.x,
           POINTER_POS.y,
@@ -49,47 +117,25 @@ const A = (p: T) => {
         const rX = ((POINTER_POS.x - x) / w) * 100;
         const rY = ((POINTER_POS.y - y) / h) * 100;
 
-        if (DIST.x !== 0) {
-          // right
-          if (rX >= BOUND_MAX) {
-            w += DIST.x;
-            tX = (x / w) * 100;
-          }
-          // left
-          else if (rX <= BOUND_MIN) {
-            w -= DIST.x;
-            x = aR - w;
-            tX = ((aR - w) / w) * 100;
-          }
-          // move
-          else if (rY > BOUND_MIN && rY < BOUND_MAX) {
-            tX = ((x += DIST.x) * 100) / w;
-          }
-          ELE.style.width = w + "%";
-        }
+        DIST.x !== 0 && SET_UNIT("w", rX, rY, DIST.x, "r", "l", aR, ELE);
+        DIST.y !== 0 && SET_UNIT("h", rX, rY, DIST.y, "t", "b", aB, ELE);
 
-        if (DIST.y !== 0) {
-          // top
-          if (rY <= BOUND_MIN) {
-            h -= DIST.y;
-            y = aB - h;
-            tY = ((aB - h) / h) * 100;
-          }
-          // bottom
-          else if (rY >= BOUND_MAX) {
-            h += DIST.y;
-            tY = (y / h) * 100;
-          }
-          // move
-          else if (rX > BOUND_MIN && rX < BOUND_MAX) {
-            tY = ((y += DIST.y) * 100) / h;
-          }
-          ELE.style.height = h + "%";
+        // SAVE VALS TO DATA
+        if (typeof i !== "undefined") {
+          Object.assign(M[i], {
+            t: t,
+            x: x,
+            y: y,
+            w: w,
+            h: h,
+            z: z,
+            sW: sW,
+            sH: sH,
+            c: c,
+            bp: bp,
+          });
         }
-
-        ELE.style.transform = `translate(${tX}%,${tY}%)`;
       }
-
       STOP_PRESS(ev);
       PREV_POINTER_POS = GET_POINTER_COORDS(ev);
     }
@@ -116,7 +162,7 @@ const A = (p: T) => {
 
         /* bottom y anchor for resize */
         const tY = parseFloat(
-          ev.currentTarget.style.transform.split(",")[1].replace("%)", "")
+          ev.currentTarget.style.transform.split(",")[1]?.replace("%)", "")
         );
         aB = (h * tY) / 100 + h;
 

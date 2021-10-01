@@ -2,18 +2,17 @@
   position: absolute;
   touch-action: none;
   display: none;
+  border: 1px solid black;
 }
 
 .sm {
   @media only screen and (min-width: 460px) and (max-width: 599px) {
     display: block;
-    background-color: red;
   }
 }
 
 .lg {
   @media only screen and (min-width: 600px) and (max-width: 1000px) {
     display: block;
-    background-color: blue;
   }
 }
